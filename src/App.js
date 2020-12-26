@@ -1,7 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect } from 'react'
+import logo from './logo.svg'
+import './App.css'
+import useGoogleSpreadsheet from 'use-google-spreadsheet'
+
+console.log(process.env)
 
 function App() {
+  const API_KEY = process.env.REACT_APP_API_KEY
+  const shareUrl = process.env.REACT_APP_SHARE_URL
+  const { rows } = useGoogleSpreadsheet(shareUrl, API_KEY)
+
+  useEffect(() => {}, [])
+
+  console.log(rows)
+
   return (
     <div className="App">
       <header className="App-header">
@@ -19,7 +31,7 @@ function App() {
         </a>
       </header>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
