@@ -9,7 +9,8 @@ export const ChartBackground = styled.div`
   min-width: 420px;
   /* backdrop-filter: blur(4px);
   background-color: #2f4858cc; */
-  background: rgba(37, 37, 37, 0.6);
+  /* background: rgba(37, 37, 37, 0.6); */
+  background: rgba(245, 245, 245, 0.6);
   backdrop-filter: blur(5px);
   border-radius: 13px;
   /* .bg {

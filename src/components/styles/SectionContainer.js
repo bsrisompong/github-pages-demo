@@ -18,7 +18,7 @@ const SectionContainer = styled.section`
   position: 'relative';
   padding: 20px;
   box-sizing: border-box;
-  gap: 20px;
+  gap: 10px;
 `
 
 export default SectionContainer

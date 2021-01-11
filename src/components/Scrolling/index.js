@@ -81,7 +81,7 @@ const Scrolling = (props) => {
             <ResponsiveLine
               curve="monotoneX"
               data={data}
-              margin={{ top: 100, right: 100, bottom: 100, left: 100 }}
+              margin={{ top: 60, right: 80, bottom: 60, left: 80 }}
               xScale={{ type: 'point' }}
               yScale={{
                 type: 'linear',
