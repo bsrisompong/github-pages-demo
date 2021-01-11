@@ -19,8 +19,8 @@ const MenuItem = styled.li`
   align-items: center;
   padding: 7px 7px 7px 7px;
   border-radius: 0 20px 20px 0;
-  background-color: #fff;
-
+  background: rgba(245, 245, 245, 0.6);
+  backdrop-filter: blur(10px);
   gap: 10px;
   overflow: hidden;
 

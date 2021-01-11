@@ -1,7 +1,7 @@
 import emoji from 'emoji-dictionary'
 import styled from 'styled-components'
 
-const Container = styled.div`
+const Container = styled.span`
   font-size: ${({ fontSize }) => (fontSize ? `${fontSize}px` : 'inherit')};
   line-height: 1;
 `

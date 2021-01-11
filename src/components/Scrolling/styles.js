@@ -4,10 +4,14 @@ export const ChartBackground = styled.div`
   /* border-radius: 10px; */
   /* background-color: #2f4858; */
   /* filter: blur(20px); */
-  height: 100%;
+  height: 485px;
   width: 100%;
-  backdrop-filter: blur(4px);
-  background-color: #2f4858cc;
+  min-width: 420px;
+  /* backdrop-filter: blur(4px);
+  background-color: #2f4858cc; */
+  background: rgba(37, 37, 37, 0.6);
+  backdrop-filter: blur(5px);
+  border-radius: 13px;
   /* .bg {
     height: 100%;
     width: 100%;

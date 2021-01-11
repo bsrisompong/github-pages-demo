@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Sky from 'react-sky'
 import styled from 'styled-components'
 import HintLogo from 'images/hint_logo.png'
@@ -16,11 +16,15 @@ const Background = styled.div`
 
 console.log(process.env.REACT_APP_TUTOR_URL)
 function App() {
+  const [isLoading, setLoading] = useState(true)
   // const API_KEY = process.env.REACT_APP_API_KEY
   const shareUrl = process.env.REACT_APP_TUTOR_URL
   const { rows } = useGoogleSpreadsheet(shareUrl)
 
-  useEffect(() => {}, [])
+  useEffect(() => {
+    if (rows === null) setLoading(true)
+    if (Array.isArray(rows)) setLoading(false)
+  }, [rows])
 
   console.log(rows)
 
@@ -48,7 +52,7 @@ function App() {
           }
         />
       </Background>
-      <Scrolling />
+      {isLoading ? 'Loading' : <Scrolling rows={rows} />}
     </div>
   )
 }
