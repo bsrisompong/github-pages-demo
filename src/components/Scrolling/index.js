@@ -62,6 +62,7 @@ const Scrolling = (props) => {
             <ResponsiveLine
               colors={{ scheme: 'set1' }}
               lineWidth="4px"
+              isInteractive={true}
               enableArea
               useMesh={true}
               curve="linear"
