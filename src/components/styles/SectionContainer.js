@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 const SectionContainer = styled.section`
-  height: 100vh;
+  min-height: 100vh;
   width: 100%;
   min-width: 320px;
   max-width: ${({ maxWidth }) => (maxWidth ? maxWidth : null)};
@@ -16,9 +16,9 @@ const SectionContainer = styled.section`
   font-size: 1em;
   scroll-behavior: smooth;
   position: 'relative';
-  padding: 20px;
+  padding: 100px 0 20px;
   box-sizing: border-box;
-  gap: 10px;
+  /* gap: 10px; */
 `
 
 export default SectionContainer

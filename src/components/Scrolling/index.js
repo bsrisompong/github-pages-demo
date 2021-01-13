@@ -1,64 +1,16 @@
 import {
   ScrollingProvider,
-  useScrollSections,
+  // useScrollSections,
   Section,
 } from 'react-scroll-section'
 import { ResponsiveLine } from '@nivo/line'
-import emoji from 'emoji-dictionary'
-// import { linearGradientDef } from '@nivo/core'
+import { linearGradientDef } from '@nivo/core'
+import _groupBy from 'lodash/groupBy'
 import { SectionContainer } from 'components/styles'
 import { ChartBackground } from './styles'
+import Welcome from 'components/Welcome'
 import Emoji from 'components/Emoji'
 import DynamicMenu from 'components/DynamicMenu'
-import ShowTotalAnswers from 'components/ShowTotalAnswers'
-
-// const data = generateDrinkStats(18)
-const data = [
-  {
-    id: 'English',
-    color: 'hsl(156, 70%, 50%)',
-    data: [
-      {
-        x: 'Dec-12',
-        y: 0,
-      },
-      {
-        x: 'Dec-19',
-        y: 40,
-      },
-      {
-        x: 'Dec-26',
-        y: 122,
-      },
-      {
-        x: 'Jan-2',
-        y: 218,
-      },
-    ],
-  },
-  {
-    id: 'Math',
-    color: 'hsl(175, 70%, 50%)',
-    data: [
-      {
-        x: 'Dec-12',
-        y: 0,
-      },
-      {
-        x: 'Dec-19',
-        y: 10,
-      },
-      {
-        x: 'Dec-26',
-        y: 22,
-      },
-      {
-        x: 'Jan-2',
-        y: 118,
-      },
-    ],
-  },
-]
 
 // const commonProperties = {
 //   width: 900,
@@ -70,34 +22,73 @@ const data = [
 // }
 
 const Scrolling = (props) => {
-  const { rows } = props
+  const { rows = [] } = props
+
+  const colors = {
+    Math: 'hsl(351, 70%, 50%)',
+    English: 'hsl(219, 70%, 50%)',
+    Science: 'hsl(145, 70%, 50%)',
+  }
+
+  const chartData = (data) => {
+    const subjectObject = _groupBy(
+      data?.filter((item) => item.tutorid === 'total_answers'),
+      (item) => item.subject
+    )
+    const result = Object.keys(subjectObject).map((key) => {
+      const data = subjectObject[key].map((item) => ({
+        x: item.date,
+        y: item.score,
+      }))
+      return {
+        id: key,
+        color: colors[key],
+        data,
+      }
+    })
+
+    return result
+  }
+
+  // const result = rows.filter((item) => item.tutorid === '')
+  // console.log(rows)
   return (
     <ScrollingProvider>
       <DynamicMenu />
       <Section id="home">
         <SectionContainer maxWidth="1400px">
-          <ShowTotalAnswers rows={rows} />
+          <Welcome rows={rows} />
           <ChartBackground>
             <ResponsiveLine
+              colors={{ scheme: 'set1' }}
+              // colors={{ datum: 'color' }}
+              // borderColor="#ff0000"
+              lineWidth="4px"
+              enableArea={true}
+              // areaOpacity={0.3}
+              // areaBlendMode={'multiply'}
+              // areaBlendMode={'normal'}
               curve="monotoneX"
-              data={data}
+              data={chartData(rows)}
               margin={{ top: 60, right: 80, bottom: 60, left: 80 }}
               xScale={{ type: 'point' }}
               yScale={{
                 type: 'linear',
                 min: 'auto',
                 max: 'auto',
-                stacked: true,
+                // stacked: true,
                 reverse: false,
               }}
+              // enableArea={true}
               yFormat=" >-.0f"
               axisTop={null}
               axisRight={null}
               enableSlices={'x'}
               pointSize={10}
               pointColor={{ theme: 'background' }}
-              pointBorderWidth={2}
+              pointBorderWidth="8px"
               pointBorderColor={{ from: 'serieColor' }}
+              pointLabel={'y'}
               pointLabelYOffset={-12}
               useMesh={true}
               legends={[
@@ -126,8 +117,14 @@ const Scrolling = (props) => {
                   ],
                 },
               ]}
+              defs={[
+                linearGradientDef('gradientA', [
+                  { offset: 0, color: 'inherit' },
+                  { offset: 100, color: 'inherit', opacity: 0 },
+                ]),
+              ]}
+              fill={[{ match: '*', id: 'gradientA' }]}
             />
-            <div className=".bg" />
           </ChartBackground>
         </SectionContainer>
       </Section>

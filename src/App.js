@@ -6,7 +6,7 @@ import ChatBox from 'images/chat-box.png'
 import './App.css'
 import useGoogleSpreadsheet from 'use-google-spreadsheet'
 import Scrolling from 'components/Scrolling'
-import Emoji from 'components/Emoji'
+import _groupBy from 'lodash/groupBy'
 
 const Background = styled.div`
   #sky {
@@ -19,14 +19,12 @@ function App() {
   const [isLoading, setLoading] = useState(true)
   // const API_KEY = process.env.REACT_APP_API_KEY
   const shareUrl = process.env.REACT_APP_TUTOR_URL
-  const { rows } = useGoogleSpreadsheet(shareUrl)
+  const { rows = [] } = useGoogleSpreadsheet(shareUrl)
 
   useEffect(() => {
     if (rows === null) setLoading(true)
     if (Array.isArray(rows)) setLoading(false)
   }, [rows])
-
-  console.log(rows)
 
   return (
     <div className="App">

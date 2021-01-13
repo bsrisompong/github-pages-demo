@@ -1,27 +1,21 @@
 import { Typography } from 'components'
 import Emoji from 'components/Emoji'
-import styled from 'styled-components'
-import Tada from 'react-reveal/Tada'
+import { useScrollSection } from 'react-scroll-section'
+import Fade from 'react-reveal/Fade'
+import { Container, TotalAnswersCard, Flex, ExamButton } from './styles'
+import useRipple from 'useripple'
 
-const Container = styled.div`
-  /* display: flex;
-  justify-content: center; */
-`
-const Flex = styled.div`
-  display: flex;
-  justify-content: center;
-  padding: 10px 0;
-`
-const TotalAnswersCard = styled.div`
-  display: flex;
-  justify-content: center;
-  padding: 15px;
-  background: rgba(245, 245, 245, 0.6);
-  backdrop-filter: blur(5.3656px);
-  border-radius: 15px;
-`
 const ShowTotalAnswers = (props) => {
   const { rows = [] } = props
+
+  const [
+    addRipple, // Attach this to any mouse event listener
+    ripples, // Render this to see the ripples
+  ] = useRipple({
+    background: '#e0ffff',
+    // background: '#55ffff',
+  })
+  const aboutSection = useScrollSection('about')
 
   const lastweek = rows.reduce(
     (last, obj) => (last > obj.week ? last : obj.week),
@@ -35,19 +29,40 @@ const ShowTotalAnswers = (props) => {
 
   return (
     <Container className="total-answer">
-      <Typography title3>เราตอบคำถามไปแล้วทั้งสิ้น</Typography>
+      <Fade cascade>
+        <Typography title3 dark>
+          เราตอบคำถามไปแล้วทั้งสิ้น
+        </Typography>
+      </Fade>
       <Flex>
-        <Tada right cascade>
+        <Fade big>
           <TotalAnswersCard>
-            <Typography extraLarge bold>
-              {totalAnswers}{' '}
-              <span>
+            <Typography extraLarge bold className="flex">
+              <span style={{ fontSize: '40px', transform: 'scale(-1, 1)' }}>
+                <Emoji>🎉</Emoji>
+              </span>
+              {totalAnswers}
+              <span style={{ fontSize: '40px' }}>
                 <Emoji>🎉</Emoji>
               </span>
             </Typography>
           </TotalAnswersCard>
-        </Tada>
+        </Fade>
       </Flex>
+      <ExamButton
+        onClick={(e) => {
+          aboutSection.onClick()
+          addRipple(e)
+        }}
+      >
+        {ripples}
+        <Typography title3>
+          <span style={{ paddingRight: '15px' }}>
+            <Emoji>🔎</Emoji>
+          </span>
+          ตรวจสอบคะแนนของคุณ
+        </Typography>
+      </ExamButton>
     </Container>
   )
 }

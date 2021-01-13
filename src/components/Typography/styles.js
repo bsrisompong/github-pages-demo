@@ -4,10 +4,15 @@ export const Text = styled.div`
   line-height: 1;
   /* font-weight: 500; */
 
-  ${({ bold }) => {
+  ${({ bold, dark }) => {
     if (bold)
       return css`
         font-weight: 700;
+      `
+
+    if (dark)
+      return css`
+        color: #fff;
       `
   }}
   ${({

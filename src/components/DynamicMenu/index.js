@@ -24,6 +24,8 @@ const MenuItem = styled.li`
   gap: 10px;
   overflow: hidden;
 
+  cursor: pointer;
+
   width: ${({ selected }) => (selected ? '100px' : '30px')};
   /* width: min-content; */
   /* transform: ${({ selected }) =>
