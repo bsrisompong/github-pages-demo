@@ -61,14 +61,10 @@ const Scrolling = (props) => {
           <ChartBackground>
             <ResponsiveLine
               colors={{ scheme: 'set1' }}
-              // colors={{ datum: 'color' }}
-              // borderColor="#ff0000"
               lineWidth="4px"
-              enableArea={true}
-              // areaOpacity={0.3}
-              // areaBlendMode={'multiply'}
-              // areaBlendMode={'normal'}
-              curve="monotoneX"
+              enableArea
+              useMesh={true}
+              curve="linear"
               data={chartData(rows)}
               margin={{ top: 60, right: 80, bottom: 60, left: 80 }}
               xScale={{ type: 'point' }}
@@ -79,18 +75,16 @@ const Scrolling = (props) => {
                 // stacked: true,
                 reverse: false,
               }}
-              // enableArea={true}
               yFormat=" >-.0f"
               axisTop={null}
               axisRight={null}
               enableSlices={'x'}
-              pointSize={10}
+              pointSize={5}
               pointColor={{ theme: 'background' }}
               pointBorderWidth="8px"
               pointBorderColor={{ from: 'serieColor' }}
-              pointLabel={'y'}
-              pointLabelYOffset={-12}
-              useMesh={true}
+              // pointLabel={'y'}
+              // pointLabelYOffset={-12}
               legends={[
                 {
                   anchor: 'bottom-right',
