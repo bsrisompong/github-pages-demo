@@ -6,7 +6,7 @@ import ChatBox from 'images/chat-box.png'
 import './App.css'
 import useGoogleSpreadsheet from 'use-google-spreadsheet'
 import Scrolling from 'components/Scrolling'
-import _groupBy from 'lodash/groupBy'
+// import _groupBy from 'lodash/groupBy'
 
 const Background = styled.div`
   #sky {
