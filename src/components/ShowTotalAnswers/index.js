@@ -15,7 +15,7 @@ const ShowTotalAnswers = (props) => {
     background: '#e0ffff',
     // background: '#55ffff',
   })
-  const aboutSection = useScrollSection('about')
+  const infoSection = useScrollSection('info')
 
   const lastweek = rows.reduce(
     (last, obj) => (last > obj.week ? last : obj.week),
@@ -29,11 +29,11 @@ const ShowTotalAnswers = (props) => {
 
   return (
     <Container className="total-answer">
-      <Fade cascade>
-        <Typography title3 dark>
-          เราตอบคำถามไปแล้วทั้งสิ้น
-        </Typography>
-      </Fade>
+      {/* <Fade cascade> */}
+      <Typography title3 dark>
+        เราตอบคำถามไปแล้วทั้งสิ้น
+      </Typography>
+      {/* </Fade> */}
       <Flex>
         <Fade big>
           <TotalAnswersCard>
@@ -51,7 +51,7 @@ const ShowTotalAnswers = (props) => {
       </Flex>
       <ExamButton
         onClick={(e) => {
-          aboutSection.onClick()
+          infoSection.onClick()
           addRipple(e)
         }}
       >

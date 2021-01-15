@@ -6,9 +6,9 @@ const Container = styled.div`
   /* display: flex;
   justify-content: center; */
   /* background: rgba(37, 37, 37, 0.6); */
-  background: rgba(37, 37, 37, 0.95);
+  background: rgba(37, 37, 37, 0.8);
   /* background: rgba(245, 245, 245, 0.6); */
-  /* backdrop-filter: blur(5px); */
+  backdrop-filter: blur(5px);
   border-radius: 13px;
   padding: 20px 0;
   /* margin: 0 20px; */

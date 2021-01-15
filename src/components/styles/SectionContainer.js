@@ -11,7 +11,7 @@ const SectionContainer = styled.section`
   display: flex;
   flex: 0 1 auto;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   text-align: center;
   font-size: 1em;
   scroll-behavior: smooth;

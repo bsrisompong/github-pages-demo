@@ -7,6 +7,7 @@ const Container = styled.span`
 `
 
 const Emoji = ({ children, size }) => {
+  if (!children) return ''
   return (
     <Container fontSize={size}>
       {emoji.getUnicode(emoji.getName(children))}

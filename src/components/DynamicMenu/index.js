@@ -1,3 +1,4 @@
+import { useRef } from 'react'
 import styled from 'styled-components'
 import { useScrollSections } from 'react-scroll-section'
 import Emoji from 'components/Emoji'
@@ -26,7 +27,7 @@ const MenuItem = styled.li`
 
   cursor: pointer;
 
-  width: ${({ selected }) => (selected ? '100px' : '30px')};
+  width: ${({ selected, width }) => (selected ? `${80}px` : '30px')};
   /* width: min-content; */
   /* transform: ${({ selected }) =>
     selected ? 'translateX(0px)' : 'translateX(-24px) '}; */
@@ -43,19 +44,29 @@ const Label = styled.div`
 
 const menuIcon = {
   home: '📊',
-  about: '🆔',
+  info: '🆔',
   more: 'ℹ️',
 }
 const DynamicMenu = () => {
   const sections = useScrollSections()
 
+  const ref = useRef()
+  console.log(ref.current?.offsetWidth)
   return (
     <Menu>
       {sections.map(({ id, onClick, selected }) => (
-        <MenuItem key={id} onClick={onClick} selected={selected}>
+        <MenuItem
+          key={id}
+          onClick={onClick}
+          selected={selected}
+          width={ref.current?.offsetWidth}
+        >
+          {console.log('id', id)}
           <Emoji size={25}>{menuIcon[id]}</Emoji>
           {selected && (
-            <Label selected={selected}>{id.toLocaleUpperCase()}</Label>
+            <Label selected={selected} ref={ref}>
+              {id.toLocaleUpperCase()}
+            </Label>
           )}
         </MenuItem>
       ))}
