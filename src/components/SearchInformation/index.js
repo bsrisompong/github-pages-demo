@@ -67,7 +67,7 @@ const FlexItem = styled.div`
 
 const ChartWraper = styled.div`
   position: relative;
-  flex: 1 1 auto;
+  flex: 1 1 500px;
   max-width: 600px;
   max-height: 500px;
 `
@@ -161,7 +161,7 @@ const SearchInformation = (props) => {
         >
           <Typography title3>Tutor Info</Typography>
           <Flex>
-            <FlexItem>
+            <FlexItem style={{ flexBasis: '50px' }}>
               <Flex row margin={'20px 0'}>
                 <Flex>
                   <Typography subheadline>line account:</Typography>
