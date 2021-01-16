@@ -195,7 +195,7 @@ const SearchInformation = (props) => {
                 dotBorderColor="#fff"
                 dotBorderWidth={2}
                 enableDotLabel={true}
-                gridLevels={10}
+                gridLevels={5}
                 // gridShape="linear"
                 gridShape="circular"
                 gridLabelOffset={22}
@@ -205,8 +205,8 @@ const SearchInformation = (props) => {
                 theme={{
                   grid: {
                     line: {
-                      stroke: 'dimgrey',
-                      strokeWidth: 2,
+                      stroke: 'gainsboro',
+                      strokeWidth: 1,
                       // strokeDasharray: '4 4',
                     },
                   },

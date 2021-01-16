@@ -5,7 +5,7 @@
   /* transform: scale(0.9); */
 }
 .alert-enter-active {
-  height: 465px;
+  height: auto;
 
   opacity: 1;
   /* transform: translateX(0); */
@@ -13,7 +13,7 @@
 }
 .alert-exit {
   /* opacity: 1; */
-  height: 465px;
+  height: auto;
 }
 .alert-exit-active {
   height: 0px;
