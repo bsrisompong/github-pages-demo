@@ -65,6 +65,7 @@ export const Text = styled.div`
     if (subheadline)
       return css`
         font-size: 15px;
+        font-weight: 200;
       `
     if (footnote)
       return css`

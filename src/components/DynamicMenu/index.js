@@ -51,7 +51,6 @@ const DynamicMenu = () => {
   const sections = useScrollSections()
 
   const ref = useRef()
-  console.log(ref.current?.offsetWidth)
   return (
     <Menu>
       {sections.map(({ id, onClick, selected }) => (
@@ -61,7 +60,6 @@ const DynamicMenu = () => {
           selected={selected}
           width={ref.current?.offsetWidth}
         >
-          {console.log('id', id)}
           <Emoji size={25}>{menuIcon[id]}</Emoji>
           {selected && (
             <Label selected={selected} ref={ref}>

@@ -15,7 +15,6 @@ const Background = styled.div`
   }
 `
 
-console.log(process.env.REACT_APP_TUTOR_URL)
 function App() {
   const [isLoading, setLoading] = useState(true)
   // const API_KEY = process.env.REACT_APP_API_KEY

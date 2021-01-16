@@ -9,6 +9,7 @@ import Welcome from 'components/Welcome'
 import Emoji from 'components/Emoji'
 import DynamicMenu from 'components/DynamicMenu'
 import SearchInformation from 'components/SearchInformation'
+import shortUID from 'short-uuid'
 
 const Scrolling = (props) => {
   const { rows = [] } = props
@@ -29,14 +30,27 @@ const Scrolling = (props) => {
       const data = groupByObj[key].map((item) => ({
         x: item?.date,
         y: item?.score,
+        subject: item?.subject,
+        week: item?.week,
       }))
-      return { tutorid: groupByObj[key][0]?.tutorid, line: key, data }
+      if (groupByObj[key][0]?.tutorid === 'total_answers')
+        return {
+          uid: shortUID.generate(),
+          tutorid: '',
+          line: '',
+          data: [],
+        }
+      return {
+        uid: shortUID.generate(),
+        tutorid: groupByObj[key][0]?.tutorid,
+        line: key,
+        data,
+      }
     })
     return result
   }
   // 65
-
-  console.log(rows)
+  console.log(',s', tutorData(rows))
 
   return (
     <ScrollingProvider>

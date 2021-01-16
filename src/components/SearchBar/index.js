@@ -1,89 +1,73 @@
 import React, { Fragment, useRef } from 'react'
 import styled from 'styled-components'
+import ContentEditable from 'react-contenteditable'
+import { CSSTransition } from 'react-transition-group'
+import './style.css'
 const InputSize = styled.div`
-  /* display: inline-grid;
-  vertical-align: top;
-  align-items: center;
-  position: relative;
-  border: solid 1px;
-  padding: 0.25em 0.5em;
-  margin: 5px;
+  display: flex;
+  justify-content: center;
+  background: rgba(37, 37, 37, 0.8);
+  backdrop-filter: blur(5px);
+  border-radius: 13px;
+  width: max-content;
+  padding: 20px 30px;
+  margin: 20px auto;
+  max-width: 100vw;
+  box-sizing: border-box;
 
-  &.stacked {
-    padding: 0.5em;
-    align-items: stretch;
-
-    &::after,
-    input,
-    textarea {
-      grid-area: 2 / 1;
-    }
+  @media (max-width: 425px) {
+    padding: 20px;
   }
-
-  &::after,
-  input,
-  textarea {
-    width: auto;
-    min-width: 1em;
-    grid-area: 1 / 2;
-    font: inherit;
-    padding: 0.25em;
-    margin: 0;
-    resize: none;
-    background: none;
-    appearance: none;
-    border: none;
-  }
-
-  span {
-    padding: 0.25em;
-  }
-
-  &::after {
-    content: attr(data-value) ' ';
-    visibility: hidden;
-    white-space: pre-wrap;
-  }
-
-  &:focus-within {
-    outline: solid 1px blue;
-    box-shadow: 4px 4px 0px blue;
-
-    > span {
-      color: blue;
-    }
-
-    textarea:focus,
-    input:focus {
-      outline: none;
-    }
-  }
-
-  box-shadow: 4px 4px 0px #000;
-  > span {
-    text-transform: uppercase;
-    font-size: 0.8em;
-    font-weight: bold;
-    text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.15);
-  } */
 `
-const Input = styled.input`
-  font-size: 22px;
+
+const InputContentEditable = styled(ContentEditable)`
+  font-size: 20px;
+  line-height: 1.2;
+  color: #fff;
+  width: max-content;
+  min-width: 425px;
+  border-bottom: solid 3px #ff5555;
   outline: none;
-  border: none;
-  background: transparent;
-  border-bottom: solid 5px antiquewhite;
-  padding: 10px 0;
-  width: ${({ width }) => width};
-  min-width: 200px;
-  overflow: visible;
+  padding: 10px;
+
+  &.noContent {
+    :before {
+      content: '🔎 Search your LINE accout or tutor id';
+      color: whitesmoke;
+    }
+  }
+
+  @media (max-width: 425px) {
+    font-size: 16px;
+    min-width: 200px;
+    padding: 5px;
+  }
+
+  :focus {
+    :before {
+      content: '';
+    }
+  }
 `
 
 const SearchResults = styled.ul`
   display: flex;
   flex-direction: column;
+  /* min-height: 50px; */
+  max-height: 50vh;
+  overflow: scroll;
+  width: 425px;
+  margin: auto;
+  margin-top: -33px;
+
+  border-radius: 0 0 13px 13px;
+  background: rgba(245, 245, 245, 0.95);
+  backdrop-filter: blur(5px);
 `
-const SearchResultItem = styled.li``
+const SearchResultItem = styled.li`
+  list-style: none;
+`
+
 const SearchBar = (props) => {
   const {
     register,
@@ -92,15 +76,31 @@ const SearchBar = (props) => {
     searchStr = '',
     tutorData = [],
     handleSelectTutor,
+    search,
   } = props
 
   const inputRef = useRef()
+
+  let selection, range
+  const handleFocus = (event) => {
+    if (document.body.createTextRange) {
+      range = document.body.createTextRange()
+      range.moveToElementText(event.target)
+      range.select()
+    } else if (window.getSelection) {
+      selection = window.getSelection()
+      range = document.createRange()
+      range.selectNodeContents(event.target)
+      selection.removeAllRanges()
+      selection.addRange(range)
+    }
+  }
 
   const searchResult = (names, str) => {
     const checkRegEx = (name, str) => {
       const pattern = str
         .split('')
-        .map((x) => `(?=.*${x})`)
+        .map((x) => (x !== '\\' ? `(?=.*${x})` : `(?=.*\${x})`))
         .join('')
       const regEx = new RegExp(pattern, 'g')
 
@@ -111,7 +111,7 @@ const SearchBar = (props) => {
       const subLine = item?.line?.toLowerCase()?.substring(0, 5)
       const lowerId = item?.tutorid?.toLowerCase()
       return (
-        subLine?.includes(str?.toLowerCase()) ||
+        item?.line.toLowerCase()?.includes(str?.toLowerCase()) ||
         lowerId?.includes(str?.toLowerCase()) ||
         checkRegEx(subLine, str?.toLowerCase())
       )
@@ -122,28 +122,36 @@ const SearchBar = (props) => {
   return (
     <Fragment>
       <InputSize>
-        <Input
-          width={`${inputRef.current?.value?.length}ch`}
-          ref={(e) => {
-            register(e)
-            inputRef.current = e
-            const str = e?.target?.value
-            console.log(str)
-          }}
-          name={name}
+        <InputContentEditable
+          className={`${search !== '' ? 'hasContent' : 'noContent'} input`}
+          innerRef={register} // element's ref attribute
+          html={search} // innerHTML of the editable div
           onChange={(e) => {
-            onChange(e)
+            onChange(name, e)
           }}
-          {...props}
-        ></Input>
+          onClick={(e) => e.target.selectAll}
+          onFocus={handleFocus}
+          disable={false} // use true to disable edition
+          tagName="div" // Use a custom HTML tag (uses a div by default)
+          spellCheck={false}
+          placeholder={'asdss'}
+        ></InputContentEditable>
       </InputSize>
-      <SearchResults>
-        {searchResult(tutorData, searchStr).map((tutor) => (
-          <SearchResultItem
-            onClick={() => handleSelectTutor('selectedTutor', tutor)}
-          >{`id: ${tutor.tutorid} line: ${tutor.line}`}</SearchResultItem>
-        ))}
-      </SearchResults>
+      <CSSTransition
+        in={searchResult(tutorData, searchStr).length > 0}
+        timeout={300}
+        classNames="alert"
+        unmountOnExit
+      >
+        <SearchResults>
+          {searchResult(tutorData, searchStr).map((tutor, index) => (
+            <SearchResultItem
+              key={`${tutor?.tutorid} ${tutor?.uid}`}
+              onClick={() => handleSelectTutor('selectedTutor', tutor)}
+            >{`id: ${tutor.tutorid} line: ${tutor.line}`}</SearchResultItem>
+          ))}
+        </SearchResults>
+      </CSSTransition>
     </Fragment>
   )
 }
