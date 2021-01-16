@@ -34,6 +34,7 @@ const InputContentEditable = styled(ContentEditable)`
     :before {
       content: '🔎 Search your LINE accout or tutor id';
       color: whitesmoke;
+      opacity: 0.3;
     }
   }
 
