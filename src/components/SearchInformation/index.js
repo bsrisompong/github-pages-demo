@@ -15,6 +15,7 @@ const Container = styled.div`
     border-radius: 15px;
     height: 600px;
     width: 80%;
+    max-width: 500px;
     @media (max-width: 425px) {
       width: 100%;
     }
