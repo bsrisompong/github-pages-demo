@@ -50,7 +50,7 @@ const Scrolling = (props) => {
     return result
   }
   // 65
-  console.log(',s', tutorData(rows))
+  // console.log(',s', tutorData(rows))
 
   return (
     <ScrollingProvider>

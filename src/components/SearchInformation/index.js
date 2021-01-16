@@ -118,7 +118,7 @@ const SearchInformation = (props) => {
           const newArr = [...arr]
           const find = newArr.find((obj) => obj.subject === item.subject)
           if (find) find.score = parseInt(item.score)
-          console.log({ newArr, find })
+          // console.log({ newArr, find })
           return newArr
         },
         [
