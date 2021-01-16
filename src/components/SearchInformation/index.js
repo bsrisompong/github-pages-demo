@@ -29,7 +29,7 @@ const customStyle = {
   // borderRadius: '10px',
   width: '80%',
   height: '600px',
-  maxWidth: '1024px',
+  maxWidth: '500px',
   background: 'rgba(245,245,245,0.95)',
   backdropFilter: 'blur(5px)',
 }
