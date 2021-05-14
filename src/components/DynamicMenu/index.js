@@ -12,7 +12,7 @@ const Menu = styled.ul`
 
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  /* gap: 10px; */
 `
 
 const MenuItem = styled.li`
@@ -22,7 +22,7 @@ const MenuItem = styled.li`
   border-radius: 0 20px 20px 0;
   background: rgba(245, 245, 245, 0.6);
   backdrop-filter: blur(10px);
-  gap: 10px;
+  /* gap: 10px; */
   overflow: hidden;
 
   cursor: pointer;

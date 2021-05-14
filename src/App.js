@@ -9,10 +9,23 @@ import Scrolling from 'components/Scrolling'
 import SearchInformation from 'components/SearchBar'
 // import _groupBy from 'lodash/groupBy'
 
+const Container = styled.div`
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+`
+
 const Background = styled.div`
   #sky {
     position: fixed !important;
   }
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 `
 
 function App() {
@@ -27,7 +40,7 @@ function App() {
   }, [rows])
 
   return (
-    <div className="App">
+    <Container className="App">
       <Background
         style={{
           minHeight: '100vh',
@@ -51,7 +64,7 @@ function App() {
         />
       </Background>
       {isLoading ? 'Loading' : <Scrolling rows={rows} />}
-    </div>
+    </Container>
   )
 }
 

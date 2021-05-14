@@ -11,7 +11,7 @@ const Container = styled.div`
   backdrop-filter: blur(5px);
   border-radius: 13px;
   padding: 20px 0;
-  /* margin: 0 20px; */
+  margin: 0 0 20px 0;
   /* display: flex; */
   flex-direction: column;
 
@@ -41,7 +41,7 @@ const TotalAnswersCard = styled.div`
   .flex {
     display: flex;
     align-items: center;
-    gap: 30px;
+    /* gap: 30px; */
   }
 `
 
@@ -52,6 +52,8 @@ const ExamButton = styled.button`
   margin: 10px auto 0;
   border-radius: 13px;
   padding: 10px 20px;
+  border: none;
+  background-color: #fff;
 `
 
 export { Container, TotalAnswersCard, Flex, ExamButton }

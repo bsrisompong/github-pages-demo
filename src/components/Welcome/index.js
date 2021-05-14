@@ -43,6 +43,7 @@ export const ChartBackground = styled.div`
 const Crop = styled.div`
   position: relative;
   /* margin-bottom: -200px; */
+  margin-right: 20px;
   /* height: 350px; */
   width: 296px;
   @media (max-width: 768px) {
@@ -56,7 +57,7 @@ const Img = styled.img`
 const Content = styled.div`
   display: flex;
   flex-direction: rows;
-  gap: 20px;
+  /* gap: 20px; */
 
   @media (max-width: 768px) {
     flex-direction: column;
@@ -67,7 +68,8 @@ const Right = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
-  gap: 20px;
+  /* gap: 20px; */
+  margin: 0 0 20px 0;
 `
 
 const chartData = (data) => {
