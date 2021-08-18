@@ -92,22 +92,12 @@ const SearchInformation = (props) => {
     onChange(name, e)
   }, 0)
 
-  // const [isReady] = useDebounce(() => {}, 1000, [state])
-  // console.log()
-
-  // if (!tutorData) return null
-
   const reformatData = (data = []) => {
     const recentDate = moment(
       Math.max(...data.map((item) => new Date(item.x)))
     ).format('YYYY-MM-DD')
     const latestData = data.filter((item) => item?.x === recentDate)
 
-    // return [
-    //   { subject: 'science', score: 2 },
-    //   { subject: 'english', score: 0 },
-    //   { subject: 'math', score: 1 },
-    // ]
     return latestData
       .map((item) => ({
         subject: item.subject.toLowerCase(),
@@ -181,39 +171,6 @@ const SearchInformation = (props) => {
               </Flex>
             </FlexItem>
             <ChartWraper>
-              {/* <ResponsiveRadar
-                // data={[
-                //   { subject: 'science', score: 7 },
-                //   { subject: 'english', score: 50 },
-                //   { subject: 'math', score: 124 },
-                // ]}
-                data={reformatData(data)}
-                indexBy="subject"
-                keys={['score']}
-                animate
-                margin={{ top: 30, right: 30, bottom: 30, left: 30 }}
-                curve={'linearClosed'}
-                dotSize={10}
-                dotBorderColor="#fff"
-                dotBorderWidth={2}
-                enableDotLabel={true}
-                gridLevels={5}
-                // gridShape="linear"
-                gridShape="circular"
-                gridLabelOffset={22}
-                // maxValue={1000}
-                // height={400}
-                // width={400}
-                theme={{
-                  grid: {
-                    line: {
-                      stroke: 'gainsboro',
-                      strokeWidth: 1,
-                      // strokeDasharray: '4 4',
-                    },
-                  },
-                }}
-              /> */}
               <ResponsiveBar
                 data={reformatData(data)}
                 indexBy="subject"

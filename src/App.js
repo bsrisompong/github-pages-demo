@@ -6,7 +6,7 @@ import ChatBox from 'images/chat-box.png'
 import './App.css'
 import useGoogleSpreadsheet from 'use-google-spreadsheet'
 import Scrolling from 'components/Scrolling'
-import SearchInformation from 'components/SearchBar'
+// import SearchInformation from 'components/SearchBar'
 // import _groupBy from 'lodash/groupBy'
 
 const Container = styled.div`
@@ -30,9 +30,12 @@ const Background = styled.div`
 
 function App() {
   const [isLoading, setLoading] = useState(true)
-  // const API_KEY = process.env.REACT_APP_API_KEY
+  const API_KEY = process.env.REACT_APP_API_KEY
+  console.log('API_KEY: ', API_KEY);
+  console.log('API_KEY: ', typeof API_KEY);
   const shareUrl = process.env.REACT_APP_TUTOR_URL
-  const { rows = [] } = useGoogleSpreadsheet(shareUrl)
+  const { rows = [] } = useGoogleSpreadsheet(shareUrl, API_KEY)
+  console.log('rows: ', rows);
 
   useEffect(() => {
     if (rows === null) setLoading(true)

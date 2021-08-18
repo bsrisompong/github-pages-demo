@@ -74,13 +74,13 @@ const Right = styled.div`
 
 const chartData = (data) => {
   const subjectObject = _groupBy(
-    data?.filter((item) => item.tutorid === 'total_answers'),
-    (item) => item.subject
+    data?.filter((item) => item['Tutor ID'] === 'total_answers'),
+    (item) => item.SUBJECT
   )
   const result = Object.keys(subjectObject).map((key) => {
     const data = subjectObject[key].map((item) => ({
-      x: item.date,
-      y: item.score,
+      x: item.DATE,
+      y: item.SCORE,
     }))
     return {
       id: key,

@@ -18,14 +18,16 @@ const ShowTotalAnswers = (props) => {
   const infoSection = useScrollSection('info')
 
   const lastweek = rows.reduce(
-    (last, obj) => (last > obj.week ? last : obj.week),
+    (last, obj) => (last > obj.WEEK ? last : obj.WEEK),
     0
   )
+
   const totalAnswers = rows
-    .filter(
-      (item) => item.tutorid === 'total_answers' && item.week === lastweek
+  .filter(
+    (item) => item['Tutor ID'] === 'total_answers' && item.WEEK === lastweek
     )
-    .reduce((sum, item) => sum + parseInt(item.score), 0)
+    .reduce((sum, item) => sum + parseInt(item.SCORE), 0)
+
 
   return (
     <Container className="total-answer">

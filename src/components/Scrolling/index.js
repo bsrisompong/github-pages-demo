@@ -14,26 +14,17 @@ import shortUID from 'short-uuid'
 const Scrolling = (props) => {
   const { rows = [] } = props
 
-  const colors = {
-    Math: 'hsl(351, 70%, 50%)',
-    English: 'hsl(219, 70%, 50%)',
-    Science: 'hsl(145, 70%, 50%)',
-  }
-
-  // const result = rows.filter((item) => item.tutorid === '')
-  // console.log(_groupBy(rows, (item) => item.line).map((item) => item))
-  // console.log('🙃', _chain(rows).groupBy('tutorid'))
 
   const tutorData = (data) => {
-    const groupByObj = _groupBy(data, (item) => item.line)
+    const groupByObj = _groupBy(data, (item) => item.LINE)
     const result = Object.keys(groupByObj).map((key) => {
       const data = groupByObj[key].map((item) => ({
-        x: item?.date,
-        y: item?.score,
-        subject: item?.subject,
-        week: item?.week,
+        x: item?.DATE,
+        y: item?.SCORE,
+        subject: item?.SUBJECT,
+        week: item?.WEEK,
       }))
-      if (groupByObj[key][0]?.tutorid === 'total_answers')
+      if (groupByObj[key][0]['Tutor ID'] === 'total_answers')
         return {
           uid: shortUID.generate(),
           tutorid: '',
@@ -42,7 +33,7 @@ const Scrolling = (props) => {
         }
       return {
         uid: shortUID.generate(),
-        tutorid: groupByObj[key][0]?.tutorid,
+        tutorid: groupByObj[key][0]['Tutor ID'],
         line: key,
         data,
       }

@@ -1,4 +1,4 @@
-import React, { Fragment, useRef } from 'react'
+import React, { Fragment } from 'react'
 import styled from 'styled-components'
 import ContentEditable from 'react-contenteditable'
 import { CSSTransition } from 'react-transition-group'
@@ -80,7 +80,6 @@ const SearchBar = (props) => {
     search,
   } = props
 
-  const inputRef = useRef()
 
   let selection, range
   const handleFocus = (event) => {
@@ -109,6 +108,7 @@ const SearchBar = (props) => {
     }
 
     const result = names.filter((item) => {
+      console.log('itemmmmm: ', item);
       const subLine = item?.line?.toLowerCase()?.substring(0, 5)
       const lowerId = item?.tutorid?.toLowerCase()
       return (
@@ -147,7 +147,7 @@ const SearchBar = (props) => {
         <SearchResults>
           {searchResult(tutorData, searchStr).map((tutor, index) => (
             <SearchResultItem
-              key={`${tutor?.tutorid} ${tutor?.uid}`}
+              key={`${tutor.tutorid} ${tutor?.uid}`}
               onClick={() => handleSelectTutor('selectedTutor', tutor)}
             >{`id: ${tutor.tutorid} line: ${tutor.line}`}</SearchResultItem>
           ))}
